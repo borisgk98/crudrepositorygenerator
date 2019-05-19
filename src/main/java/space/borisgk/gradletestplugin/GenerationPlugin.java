@@ -2,6 +2,7 @@ package space.borisgk.gradletestplugin;
 
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
+import org.springframework.stereotype.Component;
 
 public class GenerationPlugin implements Plugin<Project> {
     public GenerationPlugin() {

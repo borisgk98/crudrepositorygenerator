@@ -1,23 +1,25 @@
 group = 'space.borisgk'
-version = '1.0.0-SNAPSHOT'
+version = '0.1'
 
 apply plugin: 'groovy'
 apply plugin: 'maven'
-apply plugin: 'java'
-apply plugin: 'io.spring.dependency-management'
-apply plugin: 'org.springframework.boot'
-apply plugin: 'space.borisgk.gradle.crudcontrollersgeneration'
+//apply plugin: 'java'
+//apply plugin: 'io.spring.dependency-management'
+//apply plugin: 'org.springframework.boot'
+apply plugin: 'space.borisgk.crudgeneration'
 
 sourceCompatibility = 1.8
 
 dependencies {
     compile gradleApi()
 
-    testCompile 'junit:junit:4.12'
+//    testCompile 'junit:junit:4.12'
     implementation 'org.springframework.boot:spring-boot-starter'
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    // https://mvnrepository.com/artifact/log4j/log4j
+    compile group: 'log4j', name: 'log4j', version: '1.2.17'
 
 }
 
@@ -28,14 +30,14 @@ configurations {
 }
 
 repositories {
-    mavenCentral()
     mavenLocal()
+    mavenCentral()
 }
 
-crudGenerationSetting {
-    srcRoot = "/home/boris/D/my programms/gradle/testplugin/src/main/java".toString()
-    generationPackage = "test.generation"
-}
+//crudGenerationSetting {
+//    srcRoot = "/home/boris/D/my programms/gradle/testplugin/src/main/java".toString()
+//    generationPackage = "test.generation"
+//}
 
 buildscript {
     repositories {
@@ -45,7 +47,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'space.borisgk:crudcontrollersgeneration:1.0.0-SNAPSHOT'
+        classpath 'space.borisgk:crudgeneration:0.1'
         classpath "org.springframework.boot:spring-boot-gradle-plugin:2.1.3.RELEASE"
     }
 }

@@ -1,9 +1,12 @@
 package space.borisgk.gradletestplugin.classloader;
 
+import org.springframework.stereotype.Component;
+
 import java.io.*;
 import java.net.MalformedURLException;
 import java.nio.file.Paths;
 
+@Component
 public class ClassLoader extends java.lang.ClassLoader {
     protected File srcDir;
     protected String packagePrefix;
