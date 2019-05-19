@@ -1,9 +1,6 @@
 package space.borisgk.gradletestplugin;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import space.borisgk.gradletestplugin.classloader.ClassLoader;
 import space.borisgk.gradletestplugin.exception.GenerationPluginException;
 import space.borisgk.gradletestplugin.util.Converter;
 import space.borisgk.gradletestplugin.util.PackageToPathConverter;
@@ -14,18 +11,15 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
-@Component
 public class Generator {
     private File srcPackageDir, generationPackageDir, srcDir, generationDir;
     private String generationPackage, srcPackage;
 
-    @Autowired
-    private PackageToPathConverter converter;
-    @Autowired
+    private PackageToPathConverter converter = new PackageToPathConverter();
     private ClassLoader classLoader;
-    @Autowired
-    private Logger logger = LoggerFactory.getLogger(Generator.class);
+    private Logger logger = Logger.getLogger("gl");
 
     public void setUp(GenerationPluginExtension e) throws GenerationPluginException {
         generationPackage = e.getGenerationPackage();
@@ -38,27 +32,28 @@ public class Generator {
             throw new GenerationPluginException(String.format("srcRoot %s should be dir", e.getSrcRoot()));
         }
         srcPackageDir = srcDir.toPath().resolve(converter.convert(e.getSrcPackage())).toFile();
-        if (!srcPackageDir.exists() || !srcPackageDir.isFile()) {
+        if (!srcPackageDir.exists() || srcPackageDir.isFile()) {
             throw new GenerationPluginException(String.format("srcPackage %s does not exist", e.getSrcPackage()));
         }
         generationDir = Paths.get(e.getGenerationRoot()).toFile();
         if (!generationDir.exists()) {
             generationDir.mkdirs();
         }
-        srcPackageDir = srcDir.toPath().resolve(converter.convert(e.getGenerationPackage())).toFile();
-        if (!srcPackageDir.exists()) {
-            srcPackageDir.mkdirs();
+        generationPackageDir = srcDir.toPath().resolve(converter.convert(e.getGenerationPackage())).toFile();
+        if (!generationPackageDir.exists()) {
+            generationPackageDir.mkdirs();
         }
+        classLoader = new ClassLoader(srcDir, srcPackage);
     }
 
     public List<Class> getApiClasses() {
         List<Class> apiClasses = new ArrayList<>();
         for (File file : srcPackageDir.listFiles()) {
             try {
-                apiClasses.add(classLoader.loadClass(file.getName()));
+                apiClasses.add(classLoader.loadClass(getClassName(file)));
             }
             catch (Exception e) {
-                logger.warn(String.format("Cannot get class from %s", file.getAbsolutePath()));
+                logger.warning(String.format("Cannot get class from %s", file.getAbsolutePath()));
             }
         }
         return apiClasses;
@@ -69,6 +64,6 @@ public class Generator {
         if (!fileName.substring(fileName.length() - 6).equals(".class")) {
             throw new IllegalArgumentException();
         }
-        return srcPackage + "." + fileName;
+        return srcPackage + "." + fileName.substring(0, fileName.length() - 6);
     }
 }
