@@ -1,0 +1,42 @@
+group = 'space.borisgk'
+version = '1.0.0-SNAPSHOT'
+
+apply plugin: 'groovy'
+apply plugin: 'maven'
+apply plugin: 'space.borisgk.gradle.crudcontrollersgeneration'
+
+sourceCompatibility = 1.8
+
+dependencies {
+    compile gradleApi()
+
+    testCompile 'junit:junit:4.12'
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+crudGenerationSetting {
+    srcRoot = "/home/boris/D/my programms/gradle/testplugin/src/main/java".toString()
+    generationPackage = "test.generation"
+}
+
+buildscript {
+    repositories {
+        mavenLocal()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath 'space.borisgk:crudcontrollersgeneration:1.0.0-SNAPSHOT'
+    }
+}
