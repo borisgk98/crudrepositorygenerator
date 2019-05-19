@@ -1,12 +1,9 @@
-package space.borisgk.gradletestplugin;
-
-import java.util.List;
+package space.borisgk.crudgeneration;
 
 import org.gradle.api.DefaultTask;
 import org.gradle.api.GradleException;
 import org.gradle.api.tasks.TaskAction;
-import space.borisgk.gradletestplugin.exception.GenerationPluginException;
-import space.borisgk.gradletestplugin.models.JavaClass;
+import space.borisgk.crudgeneration.exception.GenerationPluginException;
 
 public class GenerationTask extends DefaultTask {
 

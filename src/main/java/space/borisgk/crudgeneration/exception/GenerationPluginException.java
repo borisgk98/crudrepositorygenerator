@@ -1,4 +1,4 @@
-package space.borisgk.gradletestplugin.exception;
+package space.borisgk.crudgeneration.exception;
 
 public class GenerationPluginException extends Exception {
     public GenerationPluginException(String s) {

@@ -33,7 +33,7 @@ repositories {
 
 crudGenerationSetting {
     srcRoot = "/mnt/D/my programms/gradle/crudrepositorygenerator/build/classes/java"
-    srcPackage = "space.borisgk.gradletestplugin"
+    srcPackage = "space.borisgk.crudgeneration"
     generationRoot = "/mnt/D/my programms/gradle/crudrepositorygenerator/src/main/java"
     generationPackage = "test.generation"
 }

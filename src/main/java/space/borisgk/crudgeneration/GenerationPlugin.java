@@ -1,4 +1,4 @@
-package space.borisgk.gradletestplugin;
+package space.borisgk.crudgeneration;
 
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;

@@ -1,4 +1,4 @@
-package space.borisgk.gradletestplugin.util;
+package space.borisgk.crudgeneration.util;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;

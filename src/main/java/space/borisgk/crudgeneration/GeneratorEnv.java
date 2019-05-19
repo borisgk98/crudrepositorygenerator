@@ -1,27 +1,30 @@
-package space.borisgk.gradletestplugin;
+package space.borisgk.crudgeneration;
 
-import space.borisgk.gradletestplugin.classloader.GenerationClassLoader;
-import space.borisgk.gradletestplugin.exception.GenerationPluginException;
-import space.borisgk.gradletestplugin.util.PackageToPathConverter;
+import space.borisgk.crudgeneration.exception.GenerationPluginException;
+import space.borisgk.crudgeneration.util.PackageToPathConverter;
 
 import java.io.File;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 
 public class GeneratorEnv {
     private File srcPackageDir, generationPackageDir, srcDir, generationDir;
-    private String generationPackage, srcPackage;
+    private String generationPackage, srcPackage, servicesPackage;
 
     private PackageToPathConverter converter = new PackageToPathConverter();
-    private GenerationClassLoader generationClassLoader;
     private final Logger logger = Context.logger;
-    private List<Class> apiClasses;
+    private List<String> apiClasses;
     private String imports;
 
     public String getImports() {
         return imports;
+    }
+
+    public String getServicesPackage() {
+        return servicesPackage;
     }
 
     public void setUp(GenerationPluginExtension e) throws GenerationPluginException {
@@ -42,34 +45,30 @@ public class GeneratorEnv {
         if (!generationDir.exists()) {
             generationDir.mkdirs();
         }
-        generationPackageDir = srcDir.toPath().resolve(converter.convert(e.getGenerationPackage())).toFile();
+        generationPackageDir = generationDir.toPath().resolve(converter.convert(e.getGenerationPackage())).toFile();
         if (!generationPackageDir.exists()) {
             generationPackageDir.mkdirs();
         }
-        generationClassLoader = new GenerationClassLoader(srcDir, srcPackage);
-        apiClasses = getApiClassesPrivate();
+        apiClasses = getClassNamesFromPackage(srcPackageDir);
         if (apiClasses.isEmpty()) {
             throw new GenerationPluginException("Cannot find Api classes");
         }
+        servicesPackage = e.getServicesPackage();
         imports = e.getImportsString();
     }
 
-    public List<Class> getApiClasses() {
+
+    public List<String> getApiClasses() {
         return apiClasses;
     }
 
-    private List<Class> getApiClassesPrivate() {
-        List<Class> apiClasses = new ArrayList<>();
-        for (File file : srcPackageDir.listFiles()) {
+    private List<String> getClassNamesFromPackage(File dir) {
+        List<String> apiClasses = new ArrayList<>();
+        for (File file : dir.listFiles()) {
             try {
-                Class c = generationClassLoader.loadClass(getClassName(file));
-                if (c == null) {
-                    continue;
-                }
-                apiClasses.add(c);
+                apiClasses.add(getClassName(file));
             }
-            catch (Exception e) {
-                logger.warning(String.format("Cannot get class from %s", file.getAbsolutePath()));
+            catch (IllegalArgumentException e) {
             }
         }
         return apiClasses;
@@ -77,10 +76,14 @@ public class GeneratorEnv {
 
     private String getClassName(File file) {
         String fileName = file.getName();
-        if (!fileName.substring(fileName.length() - 6).equals(".class")) {
+        if (!fileName.substring(fileName.length() - 5).equals(".java")) {
             throw new IllegalArgumentException();
         }
-        return srcPackage + "." + fileName.substring(0, fileName.length() - 6);
+        Pattern pattern = Pattern.compile("^.*Api.java$");
+        if (!pattern.matcher(fileName).matches()) {
+            throw new IllegalArgumentException();
+        }
+        return fileName.substring(0, fileName.length() - 5);
     }
 
     public File getSrcPackageDir() {

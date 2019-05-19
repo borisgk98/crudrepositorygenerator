@@ -1,0 +1,36 @@
+package $package$;
+
+import $servicesPackage$.$model$Service;
+import $srcPackage$.$srcClassName$;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.context.request.NativeWebRequest;
+import java.util.Optional;
+$imports$
+
+@javax.annotation.Generated(
+        value = "$generatorName$",
+        date = "$date$")
+
+@Controller
+@RequestMapping("\${openapi.autoshowroom.base-path:}")
+public class $className$ implements $srcClassName$ {
+
+    private final NativeWebRequest request;
+    @Autowired
+    protected $model$Service autoService;
+
+    @org.springframework.beans.factory.annotation.Autowired
+    public $className$(NativeWebRequest request) {
+        this.request = request;
+    }
+
+    @Override
+    public Optional<NativeWebRequest> getRequest() {
+        return Optional.ofNullable(request);
+    }
+
+}

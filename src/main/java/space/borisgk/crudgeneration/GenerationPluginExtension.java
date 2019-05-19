@@ -1,6 +1,4 @@
-package space.borisgk.gradletestplugin;
-
-import java.util.List;
+package space.borisgk.crudgeneration;
 
 public class GenerationPluginExtension {
     protected String srcRoot;
@@ -59,6 +57,10 @@ public class GenerationPluginExtension {
     }
 
     public boolean checkSetUp() {
-        return srcRoot != null && srcPackage != null && generationPackage != null && generationRoot != null;
+        return srcRoot != null &&
+                srcPackage != null &&
+                generationPackage != null &&
+                generationRoot != null &&
+                servicesPackage != null;
     }
 }

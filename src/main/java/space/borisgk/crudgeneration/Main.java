@@ -1,20 +1,18 @@
-package space.borisgk.gradletestplugin;
+package space.borisgk.crudgeneration;
 
 import org.gradle.api.GradleException;
-import space.borisgk.gradletestplugin.exception.GenerationPluginException;
-import space.borisgk.gradletestplugin.models.JavaClass;
-
-import java.util.List;
+import space.borisgk.crudgeneration.exception.GenerationPluginException;
 
 public class Main {
     public static void main(String[] args) {
         GeneratorEnv generatorEnv = new GeneratorEnv();
         try {
             generatorEnv.setUp(new GenerationPluginExtension(){{
-                srcRoot = "/home/boris/progs/work/autoshowroom/server/build/classes/java/main";
+                srcRoot = "/home/boris/progs/work/autoshowroom/server/src/main/java";
                 srcPackage = "com.mera.borisgk98.autoshowroom.server.rest.api";
-                generationRoot = "/mnt/D/my programms/gradle/crudrepositorygenerator/src/main/java";
-                generationPackage = "test.generation";
+                generationRoot = "/home/boris/progs/work/autoshowroom/server/src/main/java";
+                generationPackage = "com.mera.borisgk98.autoshowroom.server.rest.api.controller";
+                servicesPackage = "com.mera.borisgk98.autoshowroom.server.services";
             }});
         }
         catch (GenerationPluginException e) {
