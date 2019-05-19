@@ -6,6 +6,7 @@ import org.gradle.api.DefaultTask;
 import org.gradle.api.GradleException;
 import org.gradle.api.tasks.TaskAction;
 import space.borisgk.gradletestplugin.exception.GenerationPluginException;
+import space.borisgk.gradletestplugin.models.JavaClass;
 
 public class GenerationTask extends DefaultTask {
 
@@ -20,16 +21,13 @@ public class GenerationTask extends DefaultTask {
 //            extension = new GenerationPluginExtension();
         }
 
-        Generator generator = new Generator();
+        GeneratorEnv generatorEnv = new GeneratorEnv();
         try {
-            generator.setUp(extension);
+            generatorEnv.setUp(extension);
         }
         catch (GenerationPluginException e) {
             throw new GradleException("Bad generation params", e);
         }
-        List<Class> apiClasses = generator.getApiClasses();
-        for (Class c : apiClasses) {
-            System.out.println(c.getName());
-        }
+        Generator generator = new Generator(generatorEnv);
     }
 }

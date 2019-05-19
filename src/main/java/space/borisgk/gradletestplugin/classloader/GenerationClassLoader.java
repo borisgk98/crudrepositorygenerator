@@ -1,19 +1,27 @@
 package space.borisgk.gradletestplugin.classloader;
 
+import space.borisgk.gradletestplugin.Context;
+
 import java.io.*;
 import java.net.MalformedURLException;
 import java.nio.file.Paths;
+import java.util.logging.Logger;
 
-public class ClassLoader extends java.lang.ClassLoader {
+public class GenerationClassLoader extends java.lang.ClassLoader {
     protected File srcDir;
     protected String packagePrefix;
+    protected Logger logger = Context.logger;
 
-    public ClassLoader(File srcDir, String packagePrefix) {
+    public GenerationClassLoader(File srcDir, String packagePrefix) {
         this.srcDir = srcDir;
         this.packagePrefix = packagePrefix;
     }
 
     public Class loadClass(String name) throws ClassNotFoundException {
+        try {
+            return findLoadedClass(name);
+        }
+        catch (Exception e) {}
         if (!supported(name)) {
             return super.loadClass(name);
         }
@@ -41,9 +49,14 @@ public class ClassLoader extends java.lang.ClassLoader {
         } catch (IOException e) {
             throw new ClassNotFoundException("IOException while read class " + name);
         }
+        catch (Exception e) {
+            logger.warning(e.toString());
+        }
+        return null;
     }
 
     private boolean supported(String name) {
-        return name.length() > packagePrefix.length() && name.substring(packagePrefix.length()).equals(packagePrefix);
+        return name.length() > packagePrefix.length()
+                && name.substring(0, packagePrefix.length()).equals(packagePrefix);
     }
 }

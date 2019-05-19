@@ -1,10 +1,30 @@
 package space.borisgk.gradletestplugin;
 
+import java.util.List;
+
 public class GenerationPluginExtension {
     protected String srcRoot;
     protected String generationPackage;
     protected String srcPackage;
     protected String generationRoot;
+    protected String servicesPackage;
+    protected String importsString;
+
+    public String getImportsString() {
+        return importsString;
+    }
+
+    public void setImportsString(String importsString) {
+        this.importsString = importsString;
+    }
+
+    public String getServicesPackage() {
+        return servicesPackage;
+    }
+
+    public void setServicesPackage(String servicesPackage) {
+        this.servicesPackage = servicesPackage;
+    }
 
     public String getGenerationPackage() {
         return generationPackage;
