@@ -3,6 +3,9 @@ version = '1.0.0-SNAPSHOT'
 
 apply plugin: 'groovy'
 apply plugin: 'maven'
+apply plugin: 'java'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'org.springframework.boot'
 apply plugin: 'space.borisgk.gradle.crudcontrollersgeneration'
 
 sourceCompatibility = 1.8
@@ -11,6 +14,11 @@ dependencies {
     compile gradleApi()
 
     testCompile 'junit:junit:4.12'
+    implementation 'org.springframework.boot:spring-boot-starter'
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
 }
 
 configurations {
@@ -38,5 +46,6 @@ buildscript {
     }
     dependencies {
         classpath 'space.borisgk:crudcontrollersgeneration:1.0.0-SNAPSHOT'
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:2.1.3.RELEASE"
     }
 }
