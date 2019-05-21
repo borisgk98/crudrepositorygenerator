@@ -29,9 +29,9 @@ public class GeneratorEnv {
         if (srcDir.isFile()) {
             throw new GenerationPluginException(String.format("srcRoot %s should be dir", e.getSrcRoot()));
         }
-        File apiPackageDir = srcDir.toPath().resolve(converter.convert(e.getApiPackage())).toFile();
-        if (!apiPackageDir.exists() || apiPackageDir.isFile()) {
-            throw new GenerationPluginException(String.format("apiPackage %s does not exist", e.getApiPackage()));
+        File modelPackageDir = srcDir.toPath().resolve(converter.convert(e.getModelPackage())).toFile();
+        if (!modelPackageDir.exists() || modelPackageDir.isFile()) {
+            throw new GenerationPluginException(String.format("modelPackage %s does not exist", e.getModelPackage()));
         }
         File generationRootDir = new File(e.getGenerationRoot());
         if (generationRootDir.exists() && generationRootDir.isFile()) {
@@ -40,7 +40,7 @@ public class GeneratorEnv {
         if (!generationRootDir.exists()) {
             generationRootDir.mkdirs();
         }
-        List<String> models = getModelsFromApiPackage(apiPackageDir);
+        List<String> models = getModelsFromApiPackage(modelPackageDir);
         for (String m : models) {
             List<String> packages = e.getGenerationPackages(), templates = e.getGenerationTemplates();
             for (int i = 0; i < packages.size(); i++) {
@@ -88,7 +88,7 @@ public class GeneratorEnv {
         if (!fileName.substring(fileName.length() - 5).equals(".java")) {
             throw new IllegalArgumentException();
         }
-        Pattern pattern = Pattern.compile("^(.*)Api.java$");
+        Pattern pattern = Pattern.compile("^(.*).java$");
         Matcher matcher = pattern.matcher(fileName);
         if (!matcher.matches()) {
             throw new IllegalArgumentException();

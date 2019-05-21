@@ -33,7 +33,7 @@ repositories {
 
 crudGenerationSetting {
     srcRoot = "/home/boris/progs/autoshowroom/server/src/main/java"
-    apiPackage = "com.mera.borisgk98.autoshowroom.server.rest.api"
+    modelPackage = "/home/boris/progs/autoshowroom/server/src/main/java/com/mera/borisgk98/autoshowroom/server/models"
     generationRoot = "/home/boris/progs/crudrepositorygenerator/src/main/java"
     generationPackages = [
         "space.borisgk.crudgeneration.test"

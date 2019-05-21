@@ -1,12 +1,11 @@
 package space.borisgk.crudgeneration;
 
 import java.util.List;
-import java.util.Map;
 
 public class GenerationPluginExtension {
     protected String srcRoot;
     protected String generationRoot;
-    protected String apiPackage;
+    protected String modelPackage;
     protected List<String> generationPackages;
     protected List<String> generationTemplates;
 
@@ -26,12 +25,12 @@ public class GenerationPluginExtension {
         this.generationTemplates = generationTemplates;
     }
 
-    public String getApiPackage() {
-        return apiPackage;
+    public String getModelPackage() {
+        return modelPackage;
     }
 
-    public void setApiPackage(String apiPackage) {
-        this.apiPackage = apiPackage;
+    public void setModelPackage(String modelPackage) {
+        this.modelPackage = modelPackage;
     }
 
     public String getGenerationRoot() {
