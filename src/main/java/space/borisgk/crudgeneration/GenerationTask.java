@@ -14,7 +14,7 @@ public class GenerationTask extends DefaultTask {
     public void generate() {
         GenerationPluginExtension extension = this.getProject().getExtensions().findByType(GenerationPluginExtension.class);
         if (extension == null || !extension.checkSetUp()) {
-            throw new GradleException("Please set up crudGenerationSetting");
+            throw new GradleException("Please set up valid crudGenerationSetting");
 //            extension = new GenerationPluginExtension();
         }
 
@@ -25,6 +25,6 @@ public class GenerationTask extends DefaultTask {
         catch (GenerationPluginException e) {
             throw new GradleException("Bad generation params", e);
         }
-        Generator generator = new Generator(generatorEnv);
+//        Generator generator = new Generator(generatorEnv);
     }
 }

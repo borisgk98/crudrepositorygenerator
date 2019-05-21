@@ -2,6 +2,7 @@ package space.borisgk.crudgeneration;
 
 import org.antlr.stringtemplate.StringTemplate;
 import space.borisgk.crudgeneration.exception.GenerationPluginException;
+import space.borisgk.crudgeneration.models.GenerationItem;
 
 import java.io.*;
 import java.net.URL;
@@ -35,45 +36,25 @@ public class Generator {
         }
         String templateString = (new BufferedReader(new InputStreamReader(input))).lines().collect(Collectors.joining(System.lineSeparator()));
         StringTemplate template = new StringTemplate(templateString);
-        for (String apiClass : generatorEnv.getApiClasses()) {
-            if (apiClass == null) {
-                continue;
-            }
+        for (GenerationItem item : generatorEnv.getGenerationItems()) {
             try {
-                String apiClassName = apiClass;
-                String model = getModelNameFromClassName(apiClassName);
-                template.setAttribute("srcPackage", generatorEnv.getSrcPackage());
-                template.setAttribute("model", model);
-                template.setAttribute("package", generatorEnv.getGenerationPackage());
-                template.setAttribute("srcClassName", apiClassName);
-                template.setAttribute("imports", generatorEnv.getImports());
-                template.setAttribute("generatorName", Generator.class.getName());
-                template.setAttribute("date", new Date());
-                String newClassName = model + "ApiController";
-                template.setAttribute("className", newClassName);
-                template.setAttribute("servicesPackage", generatorEnv.getServicesPackage());
+//                String model = getModelNameFromClassName(apiClassName);
+//                template.setAttribute("model", model);
 
+                String newClassName = "";
                 String res = template.toString();
-                Path path = generatorEnv.getGenerationPackageDir().toPath().resolve(newClassName + ".java");
                 try {
-                    File file = path.toFile();
-                    if (!file.exists()) {
-                        file.createNewFile();
-                    }
-                    logger.info(String.format("Write new class to %s", path.toString()));
-                    Files.write(path, res.getBytes());
+                    File file = item.getGenerationFileOut();
+                    logger.info(String.format("Write new class to %s", file.toPath().toString()));
+                    Files.write(file.toPath(), res.getBytes());
                 }
                 catch (IOException e) {
-                    logger.warning("Cannot write file " + path);
+                    logger.warning("Cannot write file " + "");
                 }
             }
             finally {
                 template.reset();
             }
         }
-    }
-
-    protected String getModelNameFromClassName(String className) {
-        return className.substring(0, className.length() - 3);
     }
 }

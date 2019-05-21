@@ -9,10 +9,7 @@ public class Main {
         try {
             generatorEnv.setUp(new GenerationPluginExtension(){{
                 srcRoot = "/home/boris/progs/work/autoshowroom/server/src/main/java";
-                srcPackage = "com.mera.borisgk98.autoshowroom.server.rest.api";
                 generationRoot = "/home/boris/progs/work/autoshowroom/server/src/main/java";
-                generationPackage = "com.mera.borisgk98.autoshowroom.server.rest.api.controller";
-                servicesPackage = "com.mera.borisgk98.autoshowroom.server.services";
             }});
         }
         catch (GenerationPluginException e) {

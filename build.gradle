@@ -32,10 +32,15 @@ repositories {
 }
 
 crudGenerationSetting {
-    srcRoot = "/mnt/D/my programms/gradle/crudrepositorygenerator/build/classes/java"
-    srcPackage = "space.borisgk.crudgeneration"
-    generationRoot = "/mnt/D/my programms/gradle/crudrepositorygenerator/src/main/java"
-    generationPackage = "test.generation"
+    srcRoot = "/home/boris/progs/autoshowroom/server/src/main/java"
+    apiPackage = "com.mera.borisgk98.autoshowroom.server.rest.api"
+    generationRoot = "/home/boris/progs/crudrepositorygenerator/src/main/java"
+    generationPackages = [
+        "p1", "p2"
+    ]
+    generationTemplates = [
+        "t1", "t2"
+    ]
 }
 
 buildscript {

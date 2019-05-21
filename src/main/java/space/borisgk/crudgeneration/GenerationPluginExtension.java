@@ -1,43 +1,37 @@
 package space.borisgk.crudgeneration;
 
+import java.util.List;
+import java.util.Map;
+
 public class GenerationPluginExtension {
     protected String srcRoot;
-    protected String generationPackage;
-    protected String srcPackage;
     protected String generationRoot;
-    protected String servicesPackage;
-    protected String importsString;
+    protected String apiPackage;
+    protected List<String> generationPackages;
+    protected List<String> generationTemplates;
 
-    public String getImportsString() {
-        return importsString;
+    public List<String> getGenerationPackages() {
+        return generationPackages;
     }
 
-    public void setImportsString(String importsString) {
-        this.importsString = importsString;
+    public void setGenerationPackages(List<String> generationPackages) {
+        this.generationPackages = generationPackages;
     }
 
-    public String getServicesPackage() {
-        return servicesPackage;
+    public List<String> getGenerationTemplates() {
+        return generationTemplates;
     }
 
-    public void setServicesPackage(String servicesPackage) {
-        this.servicesPackage = servicesPackage;
+    public void setGenerationTemplates(List<String> generationTemplates) {
+        this.generationTemplates = generationTemplates;
     }
 
-    public String getGenerationPackage() {
-        return generationPackage;
+    public String getApiPackage() {
+        return apiPackage;
     }
 
-    public void setGenerationPackage(String generationPackage) {
-        this.generationPackage = generationPackage;
-    }
-
-    public String getSrcPackage() {
-        return srcPackage;
-    }
-
-    public void setSrcPackage(String srcPackage) {
-        this.srcPackage = srcPackage;
+    public void setApiPackage(String apiPackage) {
+        this.apiPackage = apiPackage;
     }
 
     public String getGenerationRoot() {
@@ -58,9 +52,10 @@ public class GenerationPluginExtension {
 
     public boolean checkSetUp() {
         return srcRoot != null &&
-                srcPackage != null &&
-                generationPackage != null &&
                 generationRoot != null &&
-                servicesPackage != null;
+                generationPackages != null &&
+                generationTemplates != null &&
+                generationPackages.size() != 0 &&
+                generationTemplates.size() == generationPackages.size();
     }
 }
