@@ -35,6 +35,7 @@ crudGenerationSetting {
     srcRoot = "/home/boris/progs/autoshowroom/server/src/main/java"
     modelPackage = "/home/boris/progs/autoshowroom/server/src/main/java/com/mera/borisgk98/autoshowroom/server/models"
     generationRoot = "/home/boris/progs/crudrepositorygenerator/src/main/java"
+    yamlPathTemplateSrc = "/home/boris/progs/autoshowroom/server/src/main/resources/templates/Path"
     generationPackages = [
         "space.borisgk.crudgeneration.test"
     ]

@@ -1,0 +1,748 @@
+  ### auto
+  /auto/{auto_id}:
+    get:
+      parameters:
+        - name: auto_id
+          in: path
+          schema:
+            type: integer
+      description: Get information about auto by auto id
+      responses:
+        200:
+          description: Successful getting
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/auto'
+        404:
+          description: Not found auto by this auto_id
+    put:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/auto'
+      description: Change information about auto
+      responses:
+        200:
+          description: Successful changing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/auto'
+    delete:
+      parameters:
+        - name: auto_id
+          in: path
+          schema:
+            type: integer
+      description: Delate information about auto by auto id
+      responses:
+        200:
+          description: Successful deletting
+        404:
+          description: Not found auto by this auto_id
+  /auto:
+    get:
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+          description: Limit for number of returnig values
+        - name: offset
+          in: query
+          required: false
+          schema:
+            type: integer
+          description: Offset for number of returnig values
+      responses:
+        200:
+          description: List of autos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/auto'
+    post:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/auto'
+      description: Create information about auto
+      responses:
+        200:
+          description: Successful adding
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/auto'  ### kek
+  /kek/{kek_id}:
+    get:
+      parameters:
+        - name: kek_id
+          in: path
+          schema:
+            type: integer
+      description: Get information about kek by kek id
+      responses:
+        200:
+          description: Successful getting
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/kek'
+        404:
+          description: Not found kek by this kek_id
+    put:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/kek'
+      description: Change information about kek
+      responses:
+        200:
+          description: Successful changing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/kek'
+    delete:
+      parameters:
+        - name: kek_id
+          in: path
+          schema:
+            type: integer
+      description: Delate information about kek by kek id
+      responses:
+        200:
+          description: Successful deletting
+        404:
+          description: Not found kek by this kek_id
+  /kek:
+    get:
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+          description: Limit for number of returnig values
+        - name: offset
+          in: query
+          required: false
+          schema:
+            type: integer
+          description: Offset for number of returnig values
+      responses:
+        200:
+          description: List of keks
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/kek'
+    post:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/kek'
+      description: Create information about kek
+      responses:
+        200:
+          description: Successful adding
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/kek'  ### autooption
+  /autooption/{autooption_id}:
+    get:
+      parameters:
+        - name: autooption_id
+          in: path
+          schema:
+            type: integer
+      description: Get information about autooption by autooption id
+      responses:
+        200:
+          description: Successful getting
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/autooption'
+        404:
+          description: Not found autooption by this autooption_id
+    put:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/autooption'
+      description: Change information about autooption
+      responses:
+        200:
+          description: Successful changing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/autooption'
+    delete:
+      parameters:
+        - name: autooption_id
+          in: path
+          schema:
+            type: integer
+      description: Delate information about autooption by autooption id
+      responses:
+        200:
+          description: Successful deletting
+        404:
+          description: Not found autooption by this autooption_id
+  /autooption:
+    get:
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+          description: Limit for number of returnig values
+        - name: offset
+          in: query
+          required: false
+          schema:
+            type: integer
+          description: Offset for number of returnig values
+      responses:
+        200:
+          description: List of autooptions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/autooption'
+    post:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/autooption'
+      description: Create information about autooption
+      responses:
+        200:
+          description: Successful adding
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/autooption'  ### orderstatus
+  /orderstatus/{orderstatus_id}:
+    get:
+      parameters:
+        - name: orderstatus_id
+          in: path
+          schema:
+            type: integer
+      description: Get information about orderstatus by orderstatus id
+      responses:
+        200:
+          description: Successful getting
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/orderstatus'
+        404:
+          description: Not found orderstatus by this orderstatus_id
+    put:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/orderstatus'
+      description: Change information about orderstatus
+      responses:
+        200:
+          description: Successful changing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/orderstatus'
+    delete:
+      parameters:
+        - name: orderstatus_id
+          in: path
+          schema:
+            type: integer
+      description: Delate information about orderstatus by orderstatus id
+      responses:
+        200:
+          description: Successful deletting
+        404:
+          description: Not found orderstatus by this orderstatus_id
+  /orderstatus:
+    get:
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+          description: Limit for number of returnig values
+        - name: offset
+          in: query
+          required: false
+          schema:
+            type: integer
+          description: Offset for number of returnig values
+      responses:
+        200:
+          description: List of orderstatuss
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/orderstatus'
+    post:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/orderstatus'
+      description: Create information about orderstatus
+      responses:
+        200:
+          description: Successful adding
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/orderstatus'  ### order
+  /order/{order_id}:
+    get:
+      parameters:
+        - name: order_id
+          in: path
+          schema:
+            type: integer
+      description: Get information about order by order id
+      responses:
+        200:
+          description: Successful getting
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/order'
+        404:
+          description: Not found order by this order_id
+    put:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/order'
+      description: Change information about order
+      responses:
+        200:
+          description: Successful changing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/order'
+    delete:
+      parameters:
+        - name: order_id
+          in: path
+          schema:
+            type: integer
+      description: Delate information about order by order id
+      responses:
+        200:
+          description: Successful deletting
+        404:
+          description: Not found order by this order_id
+  /order:
+    get:
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+          description: Limit for number of returnig values
+        - name: offset
+          in: query
+          required: false
+          schema:
+            type: integer
+          description: Offset for number of returnig values
+      responses:
+        200:
+          description: List of orders
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/order'
+    post:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/order'
+      description: Create information about order
+      responses:
+        200:
+          description: Successful adding
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/order'  ### customer
+  /customer/{customer_id}:
+    get:
+      parameters:
+        - name: customer_id
+          in: path
+          schema:
+            type: integer
+      description: Get information about customer by customer id
+      responses:
+        200:
+          description: Successful getting
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/customer'
+        404:
+          description: Not found customer by this customer_id
+    put:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customer'
+      description: Change information about customer
+      responses:
+        200:
+          description: Successful changing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/customer'
+    delete:
+      parameters:
+        - name: customer_id
+          in: path
+          schema:
+            type: integer
+      description: Delate information about customer by customer id
+      responses:
+        200:
+          description: Successful deletting
+        404:
+          description: Not found customer by this customer_id
+  /customer:
+    get:
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+          description: Limit for number of returnig values
+        - name: offset
+          in: query
+          required: false
+          schema:
+            type: integer
+          description: Offset for number of returnig values
+      responses:
+        200:
+          description: List of customers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/customer'
+    post:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customer'
+      description: Create information about customer
+      responses:
+        200:
+          description: Successful adding
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/customer'  ### automodel
+  /automodel/{automodel_id}:
+    get:
+      parameters:
+        - name: automodel_id
+          in: path
+          schema:
+            type: integer
+      description: Get information about automodel by automodel id
+      responses:
+        200:
+          description: Successful getting
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/automodel'
+        404:
+          description: Not found automodel by this automodel_id
+    put:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/automodel'
+      description: Change information about automodel
+      responses:
+        200:
+          description: Successful changing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/automodel'
+    delete:
+      parameters:
+        - name: automodel_id
+          in: path
+          schema:
+            type: integer
+      description: Delate information about automodel by automodel id
+      responses:
+        200:
+          description: Successful deletting
+        404:
+          description: Not found automodel by this automodel_id
+  /automodel:
+    get:
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+          description: Limit for number of returnig values
+        - name: offset
+          in: query
+          required: false
+          schema:
+            type: integer
+          description: Offset for number of returnig values
+      responses:
+        200:
+          description: List of automodels
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/automodel'
+    post:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/automodel'
+      description: Create information about automodel
+      responses:
+        200:
+          description: Successful adding
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/automodel'  ### seller
+  /seller/{seller_id}:
+    get:
+      parameters:
+        - name: seller_id
+          in: path
+          schema:
+            type: integer
+      description: Get information about seller by seller id
+      responses:
+        200:
+          description: Successful getting
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/seller'
+        404:
+          description: Not found seller by this seller_id
+    put:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/seller'
+      description: Change information about seller
+      responses:
+        200:
+          description: Successful changing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/seller'
+    delete:
+      parameters:
+        - name: seller_id
+          in: path
+          schema:
+            type: integer
+      description: Delate information about seller by seller id
+      responses:
+        200:
+          description: Successful deletting
+        404:
+          description: Not found seller by this seller_id
+  /seller:
+    get:
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+          description: Limit for number of returnig values
+        - name: offset
+          in: query
+          required: false
+          schema:
+            type: integer
+          description: Offset for number of returnig values
+      responses:
+        200:
+          description: List of sellers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/seller'
+    post:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/seller'
+      description: Create information about seller
+      responses:
+        200:
+          description: Successful adding
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/seller'  ### automark
+  /automark/{automark_id}:
+    get:
+      parameters:
+        - name: automark_id
+          in: path
+          schema:
+            type: integer
+      description: Get information about automark by automark id
+      responses:
+        200:
+          description: Successful getting
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/automark'
+        404:
+          description: Not found automark by this automark_id
+    put:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/automark'
+      description: Change information about automark
+      responses:
+        200:
+          description: Successful changing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/automark'
+    delete:
+      parameters:
+        - name: automark_id
+          in: path
+          schema:
+            type: integer
+      description: Delate information about automark by automark id
+      responses:
+        200:
+          description: Successful deletting
+        404:
+          description: Not found automark by this automark_id
+  /automark:
+    get:
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+          description: Limit for number of returnig values
+        - name: offset
+          in: query
+          required: false
+          schema:
+            type: integer
+          description: Offset for number of returnig values
+      responses:
+        200:
+          description: List of automarks
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/automark'
+    post:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/automark'
+      description: Create information about automark
+      responses:
+        200:
+          description: Successful adding
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/automark'

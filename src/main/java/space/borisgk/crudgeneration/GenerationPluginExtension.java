@@ -6,6 +6,8 @@ public class GenerationPluginExtension {
     protected String srcRoot;
     protected String generationRoot;
     protected String modelPackage;
+    protected String yamlPathTemplateSrc;
+    protected String yamlGenerationOut;
     protected List<String> generationPackages;
     protected List<String> generationTemplates;
 
@@ -15,6 +17,22 @@ public class GenerationPluginExtension {
 
     public void setGenerationPackages(List<String> generationPackages) {
         this.generationPackages = generationPackages;
+    }
+
+    public String getYamlPathTemplateSrc() {
+        return yamlPathTemplateSrc;
+    }
+
+    public void setYamlPathTemplateSrc(String yamlPathTemplateSrc) {
+        this.yamlPathTemplateSrc = yamlPathTemplateSrc;
+    }
+
+    public String getYamlGenerationOut() {
+        return yamlGenerationOut;
+    }
+
+    public void setYamlGenerationOut(String yamlGenerationOut) {
+        this.yamlGenerationOut = yamlGenerationOut;
     }
 
     public List<String> getGenerationTemplates() {

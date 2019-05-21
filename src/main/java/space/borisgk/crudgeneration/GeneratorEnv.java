@@ -18,6 +18,8 @@ public class GeneratorEnv {
     private PackageToPathConverter converter = new PackageToPathConverter();
     private final Logger logger = Context.logger;
     private List<GenerationItem> generationItems = new ArrayList<>();
+    private List<String> models;
+    private File yamlOut, yamlTemplateSrc;
 
     public void setUp(GenerationPluginExtension e) throws GenerationPluginException {
 
@@ -40,7 +42,7 @@ public class GeneratorEnv {
         if (!generationRootDir.exists()) {
             generationRootDir.mkdirs();
         }
-        List<String> models = getModelsFromApiPackage(modelPackageDir);
+        models = getModelsFromApiPackage(modelPackageDir);
         for (String m : models) {
             List<String> packages = e.getGenerationPackages(), templates = e.getGenerationTemplates();
             for (int i = 0; i < packages.size(); i++) {
@@ -67,6 +69,28 @@ public class GeneratorEnv {
                     }
                 }
                 generationItems.add(new GenerationItem(m, generationFileOut, generationTemplateSrc));
+            }
+        }
+
+        if (e.getYamlPathTemplateSrc() != null) {
+            yamlTemplateSrc = new File(e.getYamlPathTemplateSrc());
+            if (!yamlTemplateSrc.exists()) {
+                throw new GenerationPluginException("yaml source is not exist!");
+            }
+            if (e.getYamlGenerationOut() == null) {
+                yamlOut = generationRootDir.toPath().resolve("paths.yaml").toFile();
+                try {
+                    yamlOut.createNewFile();
+                }
+                catch (IOException ex) {
+                    throw new GenerationPluginException(String.format("Cannot create yaml file in %s", yamlOut));
+                }
+            }
+            else {
+                yamlOut = new File(e.getYamlGenerationOut());
+                if (!yamlOut.exists()) {
+                    throw new GenerationPluginException("yaml out is not exist!");
+                }
             }
         }
     }
@@ -98,5 +122,17 @@ public class GeneratorEnv {
 
     public List<GenerationItem> getGenerationItems() {
         return generationItems;
+    }
+
+    public List<String> getModels() {
+        return models;
+    }
+
+    public File getYamlOut() {
+        return yamlOut;
+    }
+
+    public File getYamlTemplateSrc() {
+        return yamlTemplateSrc;
     }
 }
