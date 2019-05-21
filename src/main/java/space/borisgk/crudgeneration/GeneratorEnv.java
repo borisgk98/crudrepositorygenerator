@@ -20,9 +20,15 @@ public class GeneratorEnv {
     private List<GenerationItem> generationItems = new ArrayList<>();
     private List<String> models;
     private File yamlOut, yamlTemplateSrc;
+    protected List<String> excludeModels;
 
     public void setUp(GenerationPluginExtension e) throws GenerationPluginException {
-
+        if (e.getExcludeModels() == null) {
+            this.excludeModels = new ArrayList<>();
+        }
+        else {
+            this.excludeModels = e.getExcludeModels();
+        }
 //        generationPackage = e.getGenerationPackage();
         File srcDir = Paths.get(e.getSrcRoot()).toFile();
         if (!srcDir.exists()) {
@@ -99,7 +105,11 @@ public class GeneratorEnv {
         List<String> apiClasses = new ArrayList<>();
         for (File file : dir.listFiles()) {
             try {
-                apiClasses.add(getModelName(file));
+                String modelName = getModelName(file);
+                if (excludeModels.contains(modelName)) {
+                    continue;
+                }
+                apiClasses.add(modelName);
             }
             catch (IllegalArgumentException e) {
             }

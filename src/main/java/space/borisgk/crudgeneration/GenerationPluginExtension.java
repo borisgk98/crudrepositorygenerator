@@ -10,6 +10,15 @@ public class GenerationPluginExtension {
     protected String yamlGenerationOut;
     protected List<String> generationPackages;
     protected List<String> generationTemplates;
+    protected List<String> excludeModels;
+
+    public List<String> getExcludeModels() {
+        return excludeModels;
+    }
+
+    public void setExcludeModels(List<String> excludeModels) {
+        this.excludeModels = excludeModels;
+    }
 
     public List<String> getGenerationPackages() {
         return generationPackages;

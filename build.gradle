@@ -42,6 +42,9 @@ crudGenerationSetting {
     generationTemplates = [
         "/home/boris/progs/crudrepositorygenerator/src/main/resources/Exapmle"
     ]
+    excludeModels = [
+            "Order"
+    ]
 }
 
 buildscript {
