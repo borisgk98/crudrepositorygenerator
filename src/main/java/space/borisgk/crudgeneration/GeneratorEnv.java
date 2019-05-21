@@ -5,6 +5,7 @@ import space.borisgk.crudgeneration.models.GenerationItem;
 import space.borisgk.crudgeneration.util.PackageToPathConverter;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +17,7 @@ public class GeneratorEnv {
 
     private PackageToPathConverter converter = new PackageToPathConverter();
     private final Logger logger = Context.logger;
-    private List<GenerationItem> generationItems;
+    private List<GenerationItem> generationItems = new ArrayList<>();
 
     public void setUp(GenerationPluginExtension e) throws GenerationPluginException {
 
@@ -32,9 +33,41 @@ public class GeneratorEnv {
         if (!apiPackageDir.exists() || apiPackageDir.isFile()) {
             throw new GenerationPluginException(String.format("apiPackage %s does not exist", e.getApiPackage()));
         }
+        File generationRootDir = new File(e.getGenerationRoot());
+        if (generationRootDir.exists() && generationRootDir.isFile()) {
+            throw new GenerationPluginException(String.format("srcRoot %s should be dir", generationRootDir));
+        }
+        if (!generationRootDir.exists()) {
+            generationRootDir.mkdirs();
+        }
         List<String> models = getModelsFromApiPackage(apiPackageDir);
         for (String m : models) {
-            System.out.println(m);
+            List<String> packages = e.getGenerationPackages(), templates = e.getGenerationTemplates();
+            for (int i = 0; i < packages.size(); i++) {
+                File generationTemplateSrc = new File(templates.get(i));
+                if (!generationTemplateSrc.exists()) {
+                    throw new GenerationPluginException(
+                            String.format("generation template file %s does not exist",
+                                    generationTemplateSrc));
+                }
+                File generationDir = generationRootDir.toPath()
+                        .resolve(converter.convert(packages.get(i))).toFile();
+                if (!generationDir.exists()) {
+                    generationDir.mkdirs();
+                }
+                File generationFileOut = generationDir.toPath()
+                        .resolve(m + generationTemplateSrc.getName() + ".java")
+                        .toFile();
+                if (!generationFileOut.exists()) {
+                    try {
+                        generationFileOut.createNewFile();
+                    }
+                    catch (IOException ex) {
+                        logger.warning(String.format("Cannot create file %s", generationFileOut));
+                    }
+                }
+                generationItems.add(new GenerationItem(m, generationFileOut, generationTemplateSrc));
+            }
         }
     }
 

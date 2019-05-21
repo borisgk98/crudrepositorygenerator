@@ -22,38 +22,28 @@ public class Generator {
     }
 
     public void generate() throws GenerationPluginException {
-        String resName = "ControllerTemplate.java.example";
-        URL url = getClass()
-                .getClassLoader()
-                .getResource(resName);
-        InputStream input = null;
-        try {
-            URLConnection connection = url.openConnection();
-            input = connection.getInputStream();
-        }
-        catch (IOException e) {
-            throw new GenerationPluginException("Cannot find " + resName);
-        }
-        String templateString = (new BufferedReader(new InputStreamReader(input))).lines().collect(Collectors.joining(System.lineSeparator()));
-        StringTemplate template = new StringTemplate(templateString);
         for (GenerationItem item : generatorEnv.getGenerationItems()) {
+            logger.info(String.format("Generate java file %s from template %s and model %s",
+                    item.getGenerationFileOut(),
+                    item.getGenerationTemplateSrc(),
+                    item.getModel()));
             try {
-//                String model = getModelNameFromClassName(apiClassName);
-//                template.setAttribute("model", model);
-
-                String newClassName = "";
+                String templateString = new String(Files.readAllBytes(item.getGenerationTemplateSrc().toPath()));
+                StringTemplate template = new StringTemplate(templateString);
+                template.setAttribute("model", item.getModel());
                 String res = template.toString();
+                File file = item.getGenerationFileOut();
                 try {
-                    File file = item.getGenerationFileOut();
                     logger.info(String.format("Write new class to %s", file.toPath().toString()));
                     Files.write(file.toPath(), res.getBytes());
                 }
                 catch (IOException e) {
-                    logger.warning("Cannot write file " + "");
+                    logger.warning("Cannot write file " + file);
                 }
             }
-            finally {
-                template.reset();
+            catch (Exception e) {
+                logger.warning(String.format("Cannot generate new java file for" +
+                        " model %s and for template %s", item.getModel(), item.getGenerationTemplateSrc().toPath()));
             }
         }
     }

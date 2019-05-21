@@ -25,6 +25,12 @@ public class GenerationTask extends DefaultTask {
         catch (GenerationPluginException e) {
             throw new GradleException("Bad generation params", e);
         }
-//        Generator generator = new Generator(generatorEnv);
+        Generator generator = new Generator(generatorEnv);
+        try {
+            generator.generate();
+        }
+        catch (GenerationPluginException e) {
+            throw new GradleException("Error while generate classes", e);
+        }
     }
 }
