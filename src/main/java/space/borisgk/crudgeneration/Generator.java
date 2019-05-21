@@ -30,7 +30,8 @@ public class Generator {
             try {
                 String templateString = new String(Files.readAllBytes(item.getGenerationTemplateSrc().toPath()));
                 StringTemplate template = new StringTemplate(templateString);
-                template.setAttribute("model", item.getModel());
+                template.setAttribute("model", item.getModel().toLowerCase());
+                template.setAttribute("Model", item.getModel());
                 String res = template.toString();
                 File file = item.getGenerationFileOut();
                 try {

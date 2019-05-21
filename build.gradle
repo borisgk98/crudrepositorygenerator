@@ -36,12 +36,10 @@ crudGenerationSetting {
     apiPackage = "com.mera.borisgk98.autoshowroom.server.rest.api"
     generationRoot = "/home/boris/progs/crudrepositorygenerator/src/main/java"
     generationPackages = [
-        "space.borisgk.crudgeneration.test.controllers",
-        "space.borisgk.crudgeneration.test.repos"
+        "space.borisgk.crudgeneration.test"
     ]
     generationTemplates = [
-        "/home/boris/progs/crudrepositorygenerator/src/main/resources/ApiController",
-        "/home/boris/progs/crudrepositorygenerator/src/main/resources/JpaRepository"
+        "/home/boris/progs/crudrepositorygenerator/src/main/resources/Exapmle"
     ]
 }
 

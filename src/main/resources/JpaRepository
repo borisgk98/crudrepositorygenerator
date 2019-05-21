@@ -1,7 +1,0 @@
-package com.mera.borisgk98.autoshowroom.server.repositories;
-
-import com.mera.borisgk98.autoshowroom.server.models.$model$;
-import org.springframework.data.jpa.repository.JpaRepository;
-
-public interface $model$Repository extends JpaRepository<$model$, Integer> {
-}
