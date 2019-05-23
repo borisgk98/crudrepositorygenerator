@@ -34,3 +34,16 @@ crudGenerationSetting {
     ]
 }
 ```
+## Writing a templates
+For generation code by templates this plugin use [Atlassian String template ](https://theantlrguy.atlassian.net/wiki/spaces/ST/pages/1409093/Introduction)
+
+Allows params:
+- $model$ - lowercase model name
+- $Model$ - model name read from model class file name 
+- $Modelufl$ - model with uppercase first later and lowercase another laters
+
+Example:
+- UserDetails.java - source model file from modelPackage
+- $model$ - userdetails
+- $Model$ - UserDetails
+- $Modelufl$ - Userdetails
