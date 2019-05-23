@@ -6,14 +6,17 @@ public class GenerationPluginExtension {
     protected String srcRoot;
     protected String generationRoot;
     protected String modelPackage;
-    protected String yamlPathTemplateSrc;
-    protected String yamlGenerationOut;
     protected List<String> generationPackages;
     protected List<String> generationTemplates;
+    protected List<String> generationConcatOuts;
+    protected List<String> generationConcatTemplates;
     protected List<String> excludeModels;
 
+    public GenerationPluginExtension() {
+    }
+
     public List<String> getExcludeModels() {
-        return excludeModels;
+        return this.excludeModels;
     }
 
     public void setExcludeModels(List<String> excludeModels) {
@@ -21,31 +24,31 @@ public class GenerationPluginExtension {
     }
 
     public List<String> getGenerationPackages() {
-        return generationPackages;
+        return this.generationPackages;
     }
 
     public void setGenerationPackages(List<String> generationPackages) {
         this.generationPackages = generationPackages;
     }
 
-    public String getYamlPathTemplateSrc() {
-        return yamlPathTemplateSrc;
+    public List<String> getGenerationConcatOuts() {
+        return this.generationConcatOuts;
     }
 
-    public void setYamlPathTemplateSrc(String yamlPathTemplateSrc) {
-        this.yamlPathTemplateSrc = yamlPathTemplateSrc;
+    public void setGenerationConcatOuts(List<String> generationConcatOuts) {
+        this.generationConcatOuts = generationConcatOuts;
     }
 
-    public String getYamlGenerationOut() {
-        return yamlGenerationOut;
+    public List<String> getGenerationConcatTemplates() {
+        return this.generationConcatTemplates;
     }
 
-    public void setYamlGenerationOut(String yamlGenerationOut) {
-        this.yamlGenerationOut = yamlGenerationOut;
+    public void setGenerationConcatTemplates(List<String> generationConcatTemplates) {
+        this.generationConcatTemplates = generationConcatTemplates;
     }
 
     public List<String> getGenerationTemplates() {
-        return generationTemplates;
+        return this.generationTemplates;
     }
 
     public void setGenerationTemplates(List<String> generationTemplates) {
@@ -53,7 +56,7 @@ public class GenerationPluginExtension {
     }
 
     public String getModelPackage() {
-        return modelPackage;
+        return this.modelPackage;
     }
 
     public void setModelPackage(String modelPackage) {
@@ -61,7 +64,7 @@ public class GenerationPluginExtension {
     }
 
     public String getGenerationRoot() {
-        return generationRoot;
+        return this.generationRoot;
     }
 
     public void setGenerationRoot(String generationRoot) {
@@ -69,7 +72,7 @@ public class GenerationPluginExtension {
     }
 
     public String getSrcRoot() {
-        return srcRoot;
+        return this.srcRoot;
     }
 
     public void setSrcRoot(String srcRoot) {
@@ -77,11 +80,6 @@ public class GenerationPluginExtension {
     }
 
     public boolean checkSetUp() {
-        return srcRoot != null &&
-                generationRoot != null &&
-                generationPackages != null &&
-                generationTemplates != null &&
-                generationPackages.size() != 0 &&
-                generationTemplates.size() == generationPackages.size();
+        return this.srcRoot != null && this.generationRoot != null && (this.generationPackages == null || this.generationTemplates == null || this.generationPackages.size() != 0 && this.generationTemplates.size() == this.generationPackages.size());
     }
 }
