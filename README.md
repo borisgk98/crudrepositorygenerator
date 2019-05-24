@@ -13,7 +13,8 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'space.borisgk:crudgeneration:0.1'
+        classpath 'space.borisgk:crudgeneration:0.2'
+        classpath 'org.antlr:stringtemplate:3.2'
     }
 }
 
@@ -21,13 +22,17 @@ crudGenerationSetting {
     srcRoot = "$projectDir/src/main/java"
     modelPackage = "$projectDir/src/main/com/example/model"
     generationRoot = "$projectDir/src/main/java"
-    yamlPathTemplateSrc = "$projectDir/path/to/openapi3/template/for/paths/generation"
-    yamlGenerationOut = "$projectDir/path/generation/out.yaml"
     generationPackages = [
             "com.example.controller"
     ]
     generationTemplates = [
             "$projectDir/src/main/resources/templates/Controller".toString(),
+    ]
+    generationConcatOuts = [
+            "$projectDir/src/main/resources/paths.yaml".toString()
+    ]
+    generationConcatTemplates = [
+            "$projectDir/src/main/resources/templates/Path".toString()
     ]
     excludeModels = [
             "OrderStatus"
